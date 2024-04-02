@@ -1,0 +1,102 @@
+{% extends 'static/base.html' %}
+   
+    {% block title %}
+
+        <title>Carte Type Client</title>
+
+        <style>
+          body{
+          margin : 0; 
+          padding : 0; 
+          }
+         
+         html, body, main, #map { 
+          height: 100%; 
+          width: 100%; }
+      </style>
+
+    {% endblock %}
+
+    {% block content %}
+    <section id="information" class="my-1 bg-light">
+      <div class="container">
+          <div class="row">
+            <div class="col-2">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Cliquez ici
+              </button>
+            </div>
+            <div class="col-10">
+              <marquee>Cartographie des declenchements alarme par Client Sensible / non Sensible au mois de Février 2024. Pour faire
+                une selection, cliquez sur le bouton à gauche </marquee>  
+            </div>  
+
+          </div>  
+          
+  </section> 
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Choix à faire</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body"> 
+                        <div class="zoneChoix" onclick="clique()">
+                            <div class="row"> 
+                                <div class="col"> 
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" checked>
+                                        <label class="form-check-label" for="flexSwitchCheckDefault">Sensible</label>
+                                    </div>
+                                </div>
+                                <div class="col">     
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                        <label class="form-check-label" for="flexSwitchCheckDefault">Non Sensible</label>
+                                    </div>
+                                </div>    
+
+                            </div>
+                            
+                        </div>
+
+                        </div>
+                    
+                    </div>
+                    
+                    </div>
+                    </div>
+                    
+                    </div>
+                    
+            </div>
+        <!-- Fenêtre modale-->
+
+       
+                  
+        <!-- Affiche la carte ici -->
+        <div id="map" >{{map|safe}}</div>
+
+<script >  
+          function clique(){
+           // input = "0 1 2";
+            //  htmx.ajax('GET', `/exemple_htmx/${texte}`, {target:'#map', swap:'innerHTML'});
+
+              choix = " "
+              let listeInputRadio = document.querySelectorAll(".zoneChoix input");
+              //console.log(listeInputRadio);
+              for (let i = 0; i < listeInputRadio.length; i++) {
+                if (listeInputRadio[i].checked === true) { 
+                      //console.log(i)  ; 
+                      choix = choix + i.toLocaleString();
+                }}
+                if (choix === " "){choix = "aucun";}  
+                htmx.ajax('GET', `/Type_client_htmx/${choix}`, {target:'#map', swap:'innerHTML'});  
+         
+            } 
+</script>
+
+    {% endblock %}

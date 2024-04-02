@@ -1,0 +1,196 @@
+{% extends 'static/base.html' %}
+   
+ {% block title %}
+        
+                <title>Carte declenchements par tranche de deux heures</title>
+        
+                <style>
+                  body{
+                  margin : 0; 
+                  padding : 0; 
+                  }
+                 
+                 html, body, main, #map { 
+                  height: 100%; 
+                  width: 100%; }
+              </style>
+        
+            {% endblock %}
+        
+            {% block content %}
+            <section id="information" class="my-1 bg-light">
+              <div class="container">
+                  <div class="row">
+                    <div class="col-2">
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Cliquez ici
+                      </button>
+                    </div>
+                    <div class="col-10">
+                      <marquee>Cartographie de tous les declenchements alarme par tranche de deux heures au mois de Février 2024. Pour faire
+                        une selection, cliquez sur le bouton à gauche </marquee>  
+                    </div>  
+        
+                  </div>  
+                  
+          </section> 
+        
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Choix à faire</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body"> 
+                                <div class="zoneChoix" onclick="clique()">
+                                    <div class="row"> 
+                                        <div class="col">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="deselectionner" >
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Cliquez ici pour tout deselectionner</label>
+                                        </div>
+                                        </div>
+                                    </div> <br>
+                                    <div class="row"> 
+                                        <div class="col"> 
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">00H - 02H</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">     
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">02H - 04H</label>
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="col">     
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">04H - 06H</label>
+                                            </div>
+                                        </div> 
+        
+                                    </div>
+
+                                    <div class="row"> 
+                                        <div class="col"> 
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">06H - 08H</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">     
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">08H - 10H</label>
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="col">     
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">10H - 12H</label>
+                                            </div>
+                                        </div> 
+        
+                                    </div>
+
+                                    <div class="row"> 
+                                        <div class="col"> 
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">12H - 14H</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">     
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">14H - 16H</label>
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="col">     
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">16H - 18H</label>
+                                            </div>
+                                        </div> 
+        
+                                    </div>
+
+                                    <div class="row"> 
+                                        <div class="col"> 
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">18H - 20H</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">     
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">20H - 22H</label>
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="col">     
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">22H - 00H</label>
+                                            </div>
+                                        </div> 
+        
+                                    </div>
+                                    
+                                </div>
+        
+                                </div>
+                            
+                            </div>
+                            
+                            </div>
+                            </div>
+                            
+                            </div>
+                            
+                    </div>
+                <!-- Fenêtre modale-->
+        
+               
+                          
+                <!-- Affiche la carte ici -->
+                <div id="map" >{{map|safe}}</div>
+        
+        <script >  
+                  function clique(){
+                   // input = "0 1 2";
+                    //  htmx.ajax('GET', `/exemple_htmx/${texte}`, {target:'#map', swap:'innerHTML'});
+        
+                      choix = " "
+                      let listeInputRadio = document.querySelectorAll(".zoneChoix input");
+                      //console.log(listeInputRadio);
+                      for (let i = 0; i < listeInputRadio.length; i++) {
+                        if (listeInputRadio[i].checked === true) { 
+                              //console.log(i)  ; 
+                             if (i === 0) { 
+                                for (let j = 1; j < listeInputRadio.length; j++) {listeInputRadio[j].checked = false}
+                                break;
+                             }
+                             else {choix = choix + i.toLocaleString();}
+                        }}
+                        if (choix === " "){choix = "aucun";}  
+                        htmx.ajax('GET', `all_tranche_deux_heures_htmx/${choix}`, {target:'#map', swap:'innerHTML'});  
+                 
+                    } 
+        </script>
+        
+            {% endblock %}
+        
+
+           
+
+
+
